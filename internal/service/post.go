@@ -38,16 +38,16 @@ func (p *PostService) CreatePost(post models.Post) error {
 	for x := range post.Category {
 		post.Category[x] = strings.TrimSpace(post.Category[x])
 		if len(post.Category[x]) == 0 {
-			return fmt.Errorf("Empty category")
+			return fmt.Errorf("empty category")
 		}
 	}
 	post.Title = strings.TrimSpace(post.Title)
 	if len(post.Title) == 0 {
-		return fmt.Errorf("Empty Title", post.Title)
+		return fmt.Errorf("empty title")
 	}
 	post.Description = strings.TrimSpace(post.Description)
 	if len(post.Description) == 0 {
-		return fmt.Errorf("Empty Description")
+		return fmt.Errorf("empty Description")
 	}
 	if len(post.Category) == 0 {
 		return fmt.Errorf("INVALID CATEGORY, please select existing categories ")

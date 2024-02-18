@@ -36,8 +36,10 @@ func (p *PostStorage) Category() ([]models.Category, error) {
 
 func (p *PostStorage) GetAllPostsByCategories(category string) ([]models.Post, error) {
 	query := `
-		SELECT id, title, description,imageURL, author, likes, dislikes, category, created_at
-		FROM post
+		SELECT p.id, p.title, p.description,p.imageURL, u.username, p.likes, p.dislikes, p.category, p.created_at
+		FROM post p
+		LEFT JOIN user u
+		ON u.id = p.author_id
 		WHERE category LIKE '%' || $1 || '%';
 	`
 

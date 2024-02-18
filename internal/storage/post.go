@@ -87,7 +87,10 @@ func (p *PostStorage) DeletePost(id int) error {
 
 func (p *PostStorage) GetAllPosts() ([]models.Post, error) {
 	posts := []models.Post{}
-	query := "SELECT * FROM post"
+	query := `
+		SELECT post.id, user.username, post.title, post.description, post.imageURL, post.likes, post.dislikes, post.category, post.created_at
+		FROM post
+		LEFT JOIN user ON post.author_id = user.id;`
 	row, err := p.db.Query(query)
 	if err != nil {
 		return nil, fmt.Errorf("storage: get all posts: %w", err)
@@ -107,7 +110,7 @@ func (p *PostStorage) GetAllPosts() ([]models.Post, error) {
 }
 
 func (p *PostStorage) CreatePost(post models.Post) error {
-	query := `INSERT INTO post(title, description,imageURL, author, category) VALUES ($1, $2, $3, $4,$5);`
+	query := `INSERT INTO post(title, description,imageURL, author_id, category) VALUES ($1, $2, $3, $4, $5);`
 	var categoriesStr string
 	if len(post.Category) == 1 {
 		categoriesStr = post.Category[0]
@@ -116,7 +119,7 @@ func (p *PostStorage) CreatePost(post models.Post) error {
 		categoriesStr = strings.Join(post.Category, ", ")
 	}
 
-	_, err := p.db.Exec(query, post.Title, post.Description, post.Image, post.Author, categoriesStr)
+	_, err := p.db.Exec(query, post.Title, post.Description, post.Image, post.UserId, categoriesStr)
 	if err != nil {
 		return err
 	}
@@ -124,7 +127,7 @@ func (p *PostStorage) CreatePost(post models.Post) error {
 }
 
 func (p *PostStorage) UpdatePost(post models.Post) error {
-	query := `UPDATE post SET title = $1, description = $2, author = $3, category = $4 WHERE id = $5;`
+	query := `UPDATE post SET title = $1, description = $2, category = $3 WHERE id = $4;`
 	var categoriesStr string
 	if len(post.Category) == 1 {
 		categoriesStr = post.Category[0]
@@ -133,7 +136,7 @@ func (p *PostStorage) UpdatePost(post models.Post) error {
 		categoriesStr = strings.Join(post.Category, ", ")
 	}
 
-	_, err := p.db.Exec(query, post.Title, post.Description, post.Author, categoriesStr, post.Id)
+	_, err := p.db.Exec(query, post.Title, post.Description, categoriesStr, post.Id)
 	if err != nil {
 		return err
 	}
@@ -154,7 +157,11 @@ func uniqueStrings(input []string) []string {
 }
 
 func (p *PostStorage) GetPostByID(id int) (models.Post, error) {
-	query := `SELECT id, author, title, description,imageURL, created_at, likes, dislikes, category FROM post WHERE id = $1;`
+	query := `SELECT post.id, user.username, post.title, post.description, post.imageURL, post.created_at, post.likes, post.dislikes ,post.category
+		FROM post
+		LEFT JOIN user 
+		ON post.author_id = user.id
+		WHERE post.id = $1;`
 	row := p.db.QueryRow(query, id)
 	var post models.Post
 	var categoriesStr string
@@ -169,7 +176,7 @@ func (p *PostStorage) GetMyPost(id int) ([]models.Post, error) {
 	posts := []models.Post{}
 	query := `SELECT 
 		p.id,
-		p.author,
+		u.username,
 		p.title,
 		p.description,
 		p.imageURL,
@@ -182,7 +189,7 @@ func (p *PostStorage) GetMyPost(id int) ([]models.Post, error) {
 	LEFT JOIN 
 		user u
 	ON
-		u.username = p.author
+		u.id = p.author_id
 	where 
 		u.id = $1`
 	row, err := p.db.Query(query, id)
@@ -206,7 +213,7 @@ func (p *PostStorage) GetMyLikedPost(id int) ([]models.Post, error) {
 	posts := []models.Post{}
 	query := `SELECT 
 		p.id,
-		p.author,
+		u.username,
 		p.title,
 		p.description,
 		p.imageURL,
@@ -216,6 +223,10 @@ func (p *PostStorage) GetMyLikedPost(id int) ([]models.Post, error) {
 		p.created_at
 	FROM 
 		post p
+	LEFT JOIN
+		user u
+	ON
+		u.id = p.author_id
 	JOIN 
 		likesPost lp
 	ON

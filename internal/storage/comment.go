@@ -8,7 +8,7 @@ import (
 )
 
 type CommentIR interface {
-	CreateComment(id int, username string, comment string) (int, error)
+	CreateComment(id, author_id int, comment string) (int, error)
 	GetCommentsByIdPost(id int) ([]models.Comment, error)
 	DeleteComment(id int) error
 	GetCommentsByIdComment(id int) (models.Comment, error)
@@ -64,8 +64,8 @@ func (p *CommentStorage) DeleteComment(id int) error {
 	return nil
 }
 
-func (c *CommentStorage) CreateComment(id int, user, comment string) (int, error) {
-	result, err := c.db.Exec(`INSERT INTO comment(id_post, author, comment) VALUES (?, ?, ?)`, id, user, comment)
+func (c *CommentStorage) CreateComment(id, author_id int, comment string) (int, error) {
+	result, err := c.db.Exec(`INSERT INTO comment(id_post, author_id, comment) VALUES (?, ?, ?)`, id, author_id, comment)
 	if err != nil {
 		return 0, fmt.Errorf("repo: create comment: falied %w", err)
 	}
@@ -79,7 +79,11 @@ func (c *CommentStorage) CreateComment(id int, user, comment string) (int, error
 
 func (c *CommentStorage) GetCommentsByIdPost(id int) ([]models.Comment, error) {
 	comments := []models.Comment{}
-	query := `SELECT id, author, comment, likes, dislikes, created_at FROM comment WHERE id_post=$1`
+	query := `SELECT c.id, u.username, c.comment, c.likes, c.dislikes, c.created_at 
+		FROM comment c
+		LEFT JOIN user u
+		ON u.id = c.author_id
+		WHERE c.id_post=$1`
 	rows, err := c.db.Query(query, id)
 	if err != nil {
 		return nil, fmt.Errorf("storage: comment by id post: %w", err)
@@ -96,7 +100,11 @@ func (c *CommentStorage) GetCommentsByIdPost(id int) ([]models.Comment, error) {
 }
 
 func (c *CommentStorage) GetCommentsByIdComment(id int) (models.Comment, error) {
-	query := `SELECT id_post, author, comment, likes, dislikes, created_at FROM comment WHERE id=$1`
+	query := `SELECT c.id_post, u.username, c.comment, c.likes, c.dislikes, c.created_at 
+		FROM comment c
+		LEFT JOIN user u
+		ON u.id = c.author_id
+		WHERE c.id = $1`
 	row := c.db.QueryRow(query, id)
 	var comment models.Comment
 	if err := row.Scan(&comment.PostId, &comment.Creator, &comment.Text, &comment.Likes, &comment.Dislikes, &comment.Created_at); err != nil {

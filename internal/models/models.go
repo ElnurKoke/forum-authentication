@@ -41,6 +41,7 @@ type Post struct {
 	Description string
 	Image       string
 	Category    []string
+	UserId      int
 	Author      string
 	Likes       int
 	Dislikes    int
@@ -61,6 +62,7 @@ type Message struct {
 type Comment struct {
 	Id         int
 	PostId     int
+	UserId     int
 	Creator    string
 	Text       string
 	Likes      int

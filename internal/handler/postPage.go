@@ -69,16 +69,7 @@ func (h *Handler) postPage(w http.ResponseWriter, r *http.Request) {
 		}
 		commentText := r.FormValue("text")
 
-		if commentText == "" {
-			h.ErrorPage(w, "comment field not found (empty comment)", http.StatusBadRequest)
-
-			return
-		}
-		if len(commentText) > 300 {
-			h.ErrorPage(w, "comment should be shorter than 300 symbols", http.StatusBadRequest)
-			return
-		}
-		commentid, err := h.Service.CommentServiceIR.CreateComment(id, user.Username, commentText)
+		commentid, err := h.Service.CommentServiceIR.CreateComment(id, user.Id, commentText)
 		if err != nil {
 			h.ErrorPage(w, err.Error(), http.StatusBadRequest)
 			return

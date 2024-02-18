@@ -70,6 +70,7 @@ func (h *Handler) commentPage(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		commentinfo.Text = commentText
+		commentinfo.Id = id
 		if err := h.Service.CommentServiceIR.UpdateComment(commentinfo); err != nil {
 			h.ErrorPage(w, err.Error(), http.StatusBadRequest)
 			return

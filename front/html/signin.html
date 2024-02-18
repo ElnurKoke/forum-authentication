@@ -11,7 +11,7 @@
 <body>
     <header>
         <nav>
-          <h1><a href="/">Forum</a></h1>
+          <a href="/">Forum</a>
           <div class="left">
             <a href="/signin" style="color: rgb(68, 217, 236);">Sign in</a>
           </div> 
@@ -43,6 +43,8 @@
     
             <button type="submit" value="sign-in">Войти</button>
             <a href="/signup" > Создать аккаунт</a>
+            <a href="/auth/google" class="social-link"><img src="../static/jpg/google.png" title="Authentication by your google account"></a> 
+            <a href="/login/github/" class="social-link"><img src="../static/jpg/github.png" title="Authentication by your github account"></a>
         </form>
     </main>
       {{else}}

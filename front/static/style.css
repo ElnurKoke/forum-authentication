@@ -83,8 +83,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease;
-    transform: translateX(-50px);
-    animation: slideInLeft 1s forwards;
+    
 }
 
 .container:hover {
@@ -99,6 +98,8 @@ body {
   max-width: 100%;
   height: auto;
   border-radius: 5px; 
+  transform: translateX(-50px);
+  animation: slideInLeft 1s forwards;
 }
 
 .post__header {
@@ -111,11 +112,15 @@ body {
     margin: 0;
     font-weight: bold;
     color: #1da1f2;
+    transform: translateX(50px);
+    animation: slideInRight 1s forwards;
 }
 
 .post__header h3 {
   margin-left: 20px; 
   color: #102d36cb;;
+  transform: translateX(50px);
+  animation: slideInRight 1s forwards;
 }
 
 .title {
@@ -143,12 +148,15 @@ body {
     color: #888;
     background: url('jpg/02.png') no-repeat right bottom; 
     background-size: 30px;
+    transform: translateX(50px);
+    animation: slideInRight 1s forwards;
 }
 
 .category p {
     margin: 0;
     font-size: 0.9em;
     margin-right: 5px;
+    
 }
 
 .category span {
@@ -209,7 +217,7 @@ nav a:hover span{
 }
 
 .about-link:hover img {
-  /* Добавьте стили для изменения внешнего вида иконки при наведении */
+  transform: scale(1.1)
 }
 
 

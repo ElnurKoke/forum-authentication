@@ -25,6 +25,9 @@ func (a *AuthService) CreateOrLoginByGithub(user_g models.GithubUserData) (strin
 
 	//check exists Email in db
 	exist, err := a.storage.CheckUserByNameEmail(user.Email, user.Username)
+	if err != nil {
+		return "", time.Time{}, err
+	}
 	if exist {
 		user2, err := a.storage.Auth.GetUserByEmail(user.Email)
 		if err != nil {

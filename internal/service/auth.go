@@ -40,7 +40,7 @@ func (a *AuthService) CreateUser(user models.User) error {
 		return err
 	}
 	if uniq {
-		return errors.New("Username or Email is already in used!")
+		return errors.New(" Username or Email is already in used! ")
 	}
 
 	user.Password, err = generateHashPassword(user.Password)
@@ -54,7 +54,7 @@ func (a *AuthService) CreateUser(user models.User) error {
 func (a *AuthService) CheckUser(user models.User) (string, time.Time, error) {
 	password, err := a.storage.GetPasswordByUsername(user.Username)
 	if err != nil {
-		return "", time.Time{}, errors.New("There is no user with that name <" + user.Username + ">")
+		return "", time.Time{}, errors.New(" There is no user with that name <" + user.Username + "> ")
 	}
 	if err := compareHashAndPassword(password, user.Password); err != nil {
 		return "", time.Time{}, err

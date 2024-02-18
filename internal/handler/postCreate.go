@@ -95,7 +95,7 @@ func (h *Handler) createPost(w http.ResponseWriter, r *http.Request) {
 			Description: description,
 			Image:       image,
 			Category:    categories,
-			Author:      user.Username,
+			UserId:      user.Id,
 		}); err != nil {
 			h.ErrorPage(w, err.Error(), http.StatusBadRequest)
 			return
