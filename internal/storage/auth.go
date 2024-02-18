@@ -14,6 +14,7 @@ type Auth interface {
 	GetUserByEmail(email string) (models.User, error)
 	DeleteToken(token string) error
 	CreateUserGoogle(email, username string) error
+	CreateUserGithub(email, username string) error
 }
 
 type AuthStorage struct {

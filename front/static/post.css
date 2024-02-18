@@ -19,7 +19,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(51, 51, 51, 0.5); 
+    /* background-color: rgba(51, 51, 51, 0.5);  */
     color: white;
     text-align: left;
     padding: 10px;
@@ -239,7 +239,8 @@ section button:hover img {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #b3b3b3;
+  background-image: url("../static/jpg/seamless.jpg");
+  background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -252,7 +253,7 @@ label {
   font-size: 1.5em;
 }
 
-.section1 input[type="text"], .section1 textarea {
+.section1 textarea {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
@@ -261,13 +262,24 @@ label {
   border-radius: 4px;
   box-sizing: border-box;
 }
+.section1 form input[type="text"]{
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 20px;
+}
 
 textarea {
-  background: url('jpg/02.png') no-repeat  center bottom ; 
-  background-color: #eee;
-  background-size: contain; 
+  background-color: #ffffff;
+  /* background: url('jpg/02.png') no-repeat right bottom; 
+  background-size: 50px; */
   resize: vertical;
   font-family: Arial, sans-serif; 
+  font-size: 18px;
 }
 
 
@@ -347,3 +359,32 @@ textarea {
   border: none;
   cursor: pointer;
 } */
+
+.home {
+  margin: auto;
+  position: fixed; /* фиксированное позиционирование */
+  top: 3.5%; /* расположение сверху на 50% от верхней границы окна браузера */
+  left: 97%; /* расположение слева на 50% от левой границы окна браузера */
+  transform: translate(-50%, -50%); /* сдвигаем элемент назад на 50% его ширины и высоты */
+  text-align: center; /* для выравнивания текста по центру, если это применимо */
+  display: flex; /* для использования flexbox */
+  justify-content: center; /* для выравнивания по горизонтали */
+  align-items: center; /* для выравнивания по вертикали */
+  filter: brightness(0) invert(1);
+}
+
+#home {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Добавляем анимацию transform с продолжительностью 0.3 секунды и функцией сглаживания ease */
+}
+
+#home:hover {
+  transform: scale(1.2); /* Увеличиваем масштаб при наведении */
+}
+
+.home img {
+  width: 40px; 
+  height: auto;
+}

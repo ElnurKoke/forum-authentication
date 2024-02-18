@@ -23,6 +23,7 @@ func NewHandler(services *service.Service) *Handler {
 
 func (h *Handler) InitRoutes() {
 	h.Mux.HandleFunc("/", h.middleWareGetUser(h.homePage))
+	h.Mux.HandleFunc("/about", h.info)
 
 	h.Mux.HandleFunc("/signup", h.signUp)
 	h.Mux.HandleFunc("/signin", h.signIn)
@@ -30,6 +31,10 @@ func (h *Handler) InitRoutes() {
 	h.Mux.HandleFunc("/auth/google", h.googleAuth)
 	h.Mux.HandleFunc("/oauth2callback-google", h.googleAuthCallback)
 	h.Mux.HandleFunc("/auth/google/callback", h.googleAuthCallback)
+
+	h.Mux.HandleFunc("/login/github/", h.githubLogin)
+	h.Mux.HandleFunc("/oauth2callback", h.githubCallback)
+	h.Mux.HandleFunc("/login/github/callback", h.githubCallback)
 
 	h.Mux.HandleFunc("/post/", h.middleWareGetUser(h.postPage))
 	h.Mux.HandleFunc("/post/create", h.middleWareGetUser(h.createPost))

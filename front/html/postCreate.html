@@ -18,19 +18,19 @@
         <div class="left">
             <h1>Create Post</h1>
         </div> 
-        <div class="right">
-            <a href="/">Back</a>
-        </div>
       </nav>
   </header>
-
+  <div class="home"> 
+    <a href="/" id="home"><img src="../static/jpg/home.png"></a> 
+</div>
   <section>
     <form id="myForm" method="POST" action="/post/create" enctype="multipart/form-data">
         <label>Title</label>
-        <input type="text" style="font-family: Arial, sans-serif;font-size: 20px; " pattern=".{2,}" name="title" maxlength="33" placeholder="02" required/>
+        <input type="text" style="font-family: Arial, sans-serif;font-size: 20px; " pattern=".{2,}" 
+        name="title" maxlength="33" placeholder="Enter title" required/>
 
         <label>Description</label>
-        <textarea  class="comment-textarea" rows="14" name="description" maxlength="300" required></textarea>
+        <textarea  class="comment-textarea" rows="14" name="description" placeholder="Enter description" maxlength="300" required></textarea>
 
         <div class="categories-container">  
             {{ range . }}

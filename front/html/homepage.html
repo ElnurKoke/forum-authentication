@@ -9,7 +9,7 @@
   <header>
     {{if .User.IsAuth}}
     <nav>
-      <a href="/"><h1>{{.Username}}</h1><span></span></a>
+      <a href="/" style="color: rgb(68, 217, 236);"><h1>{{.Username}}</h1><span></span></a>
             <a href="/post/myLikedPost">My Liked Posts<span></span></a>
             <a href="/notification">Status<span></span></a>
             <a href="/post/myPost">My Posts<span></span></a>
@@ -21,11 +21,11 @@
       <h1>Forum</h1>
         <a href="/signin">Sign In<span></span></a>
         <a href="/signup">Sign Up<span></span></a>
-        <a href="#contact" title="Elnur Bauyrzan:
+        <a href="/about" title="Elnur Bauyrzan:
             Tel num: +77*****5261
             Tg: @El_n_uR
             Nick: ebauyrzh
-            ">Contact<span></span></a>
+            ">About<span></span></a>
     </nav>
     {{end}}
   </header>

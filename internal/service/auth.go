@@ -17,6 +17,7 @@ type Auth interface {
 	CheckUser(user models.User) (string, time.Time, error)
 	DeleteToken(token string) error
 	CreateOrLoginByGoogle(user_g models.GoogleLoginUserData) (string, time.Time, error)
+	CreateOrLoginByGithub(user_g models.GithubUserData) (string, time.Time, error)
 }
 
 type AuthService struct {

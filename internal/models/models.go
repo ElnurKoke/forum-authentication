@@ -29,6 +29,12 @@ type GoogleLoginUserData struct {
 	UpdatedAt time.Time
 }
 
+type GithubUserData struct {
+	Login  string `json:"login"`
+	ID     int    `json:"id"`
+	NodeID string `json:"node_id"`
+}
+
 type Post struct {
 	Id          int
 	Title       string
