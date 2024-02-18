@@ -18,18 +18,19 @@
       </nav>
     {{else}}
     <nav>
-      <h1>Forum</h1>
+      <h1 style="color: rgb(68, 217, 236);">Forum</h1>
         <a href="/signin">Sign In<span></span></a>
         <a href="/signup">Sign Up<span></span></a>
-        <a href="/about" title="Elnur Bauyrzan:
-            Tel num: +77*****5261
-            Tg: @El_n_uR
-            Nick: ebauyrzh
-            ">About<span></span></a>
+        <a href="/about">About<span></span></a>
     </nav>
     {{end}}
   </header>
+  {{if .User.IsAuth}}
+  <a href="/about" class="about-link">
+    <img src="../static/jpg/02.png" alt="About">
+  </a>
 
+  {{end}}
  
     <div>
         <p></p>

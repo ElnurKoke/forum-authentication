@@ -25,6 +25,7 @@ body {
     color: white;
     text-align: left;
     padding: 10px;
+    z-index: 1000; 
   }
   
   nav {
@@ -45,6 +46,8 @@ body {
     font-weight: bold;
     color: white; 
     margin: 0 10px; 
+    transform: translateY(-50px);
+    animation: slideInTop 1s forwards;
   }
 
   nav a:hover {
@@ -61,6 +64,8 @@ body {
     color: white;
     text-align: center;
     padding: 10px;
+    transform: translateY(50px);
+    animation: slideInBot 1s forwards;
   }
 
   section {
@@ -78,7 +83,8 @@ body {
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease;
-    
+    transform: translateX(-50px);
+    animation: slideInLeft 1s forwards;
 }
 
 .container:hover {
@@ -187,4 +193,66 @@ nav a:hover span{
 
 .cont{
   text-decoration: none;
+}
+
+.about-link {
+  position: fixed;
+  top: 40%;
+  left: 10px;
+}
+
+.about-link img {
+  width: 50px; /* Регулируйте размер иконки по вашему усмотрению */
+  height: auto;
+  border-radius: 50%;
+  filter: invert(1);
+}
+
+.about-link:hover img {
+  /* Добавьте стили для изменения внешнего вида иконки при наведении */
+}
+
+
+@keyframes slideInLeft {
+  from {
+      opacity: 0;
+      transform: translateX(-50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+      opacity: 0;
+      transform: translateX(50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+@keyframes slideInTop {
+  from {
+      opacity: 0;
+      transform: translateY(-50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes slideInBot {
+  from {
+      opacity: 0;
+      transform: translateY(50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }

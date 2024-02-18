@@ -11,11 +11,9 @@ body{
     font-size: 20px;
     font-family: "Motiva Sans", "Twemoji", "Noto Sans", Helvetica, sans-serif;
     padding: 20px; /* Добавляем отступы вокруг контейнера */
+    
 }
 
-.container p:first-child {
-    margin-left: 15px; /* Убираем верхний отступ для первого абзаца */
-}
 
 nav {
     display: flex;
@@ -37,6 +35,8 @@ nav a {
     font-weight: 500;
     color: white; 
     margin: 0 10px; 
+    transform: translateY(-50px);
+    animation: slideInTop 1s forwards;
     }
 
 nav a:hover {
@@ -59,6 +59,13 @@ nav a:hover {
 .container h2{
     text-align: center;
     margin-top: 200px;
+    transform: translateX(50px);
+    animation: slideInRight 1s forwards;
+}
+
+.container p{
+    transform: translateX(-50px);
+    animation: slideInLeft 1s forwards;
 }
     
 .navigation a {
@@ -66,6 +73,8 @@ nav a:hover {
     text-decoration: none;
     font-size: 20px;
     margin: 0 10px; /* Отступы между ссылками */
+    transform: translateY(-50px);
+    animation: slideInTop 1s forwards;
 }
 
 .navigation a:hover {
@@ -97,4 +106,37 @@ nav a:hover {
     width: 30%;
     height: auto;
     
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInTop {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

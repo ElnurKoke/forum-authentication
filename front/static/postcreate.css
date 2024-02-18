@@ -21,6 +21,8 @@ body {
     gap: 5px; /* Расстояние между категориями */
     justify-content: left; /* Центрируем содержимое по горизонтали */
     text-align: left; /* Выравниваем текст по центру */
+    transform: translateY(50px);
+    animation: slideInBot 1s forwards;
   }
 
   .categories-container input[type="checkbox"] {
@@ -97,6 +99,8 @@ select[multiple] {
   nav a {
     text-decoration: none;
     color: white;
+    transform: translateY(-50px);
+    animation: slideInTop 1s forwards;
   }
 
   
@@ -109,13 +113,16 @@ select[multiple] {
     color: white;
     text-align: center;
     padding: 10px;
+    transform: translateY(50px);
+    animation: slideInBot 1s forwards;
   }
 
   section {
     font-family: 'Arial', sans-serif;
     /* background:linear-gradient(to right, #1b3e91, #0f1114); */
-    margin-top: 100px;
+    margin-top: 70px;
     padding: 20px;
+    margin-bottom: 50px;
 }
 
 form {
@@ -140,6 +147,8 @@ label {
   display: block;
   margin-top: 10px;
   font-size: 1.5em;
+  transform: translateY(-50px);
+  animation: slideInTop 1s forwards;
 }
 
 input[type="text"], textarea {
@@ -150,6 +159,8 @@ input[type="text"], textarea {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    transform: translateX(-50px);
+    animation: slideInLeft 1s forwards;
 }
 
 textarea {
@@ -161,6 +172,8 @@ textarea {
   resize: vertical; /* Вертикальное изменение размера */
   font-family: Arial, sans-serif; /* Шрифт */
   font-size: 18px; /* Размер шрифта */
+  transform: translateX(50px);
+  animation: slideInRight 1s forwards;
 }
 #add-category {
     display: block;
@@ -176,11 +189,16 @@ textarea {
 input[type="submit"] {
     background-color: #1DA1F2;
     color: #fff;
+    margin-left: 88%;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transform: translateX(50px);
+    animation: slideInRight 1s forwards;
 }
+
+
 
 input[type="submit"]:hover {
     background-color: #0D8CBF;
@@ -214,4 +232,85 @@ input[type="submit"]:hover {
 .home img {
   width: 40px; 
   height: auto;
+  transform: translateY(-50px);
+  animation: slideInTop 1s forwards;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.custom-file-upload img {
+  width: 70px; /* Регулируйте размер изображения по вашему усмотрению */
+  height: auto;
+}
+
+#image {
+  display: none;
+}
+
+
+
+
+@keyframes slideInRight {
+  from {
+      opacity: 0;
+      transform: translateX(50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+.slideright{
+  transform: translateX(50px);
+  animation: slideInRight 1s forwards;
+}
+
+@keyframes slideInTop {
+  from {
+      opacity: 0;
+      transform: translateY(-50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+.slidetop{
+  transform: translateY(-50px);
+  animation: slideInTop 1s forwards;
+}
+
+@keyframes slideInBot {
+  from {
+      opacity: 0;
+      transform: translateY(50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+.slidebot{
+  transform: translateY(50px);
+  animation: slideInBot 1s forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+      opacity: 0;
+      transform: translateX(-50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+.slideleft{
+  transform: translateX(-50px);
+  animation: slideInLeft 1s forwards;
 }

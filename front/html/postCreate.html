@@ -37,6 +37,9 @@
             <h3><input type="checkbox" name="category" value="{{ .Name }}"> {{ .Name }}</h3>
             {{ end }}
             </div>
+        <label for="image" class="custom-file-upload">
+            <img src="../static/jpg/imageup.png" alt="Upload Image">
+        </label>
         <input type="file" id="image" name="image" accept="image/*" required>
         <img id="preview" src="#" alt="Preview" style="display:none; max-width: 150px; height: auto;">
         <input type="submit" value="CREATE" />
